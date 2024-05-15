@@ -1,0 +1,35 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+}
+
+.space {
+    display: flex;
+    justify-content: right;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.videof {
+    border-bottom: 1px solid #121212;
+    background-color: white;
+    width: 30vw;
+    height: 50vh;
+}
+
+.info {
+    border-top: 1px solid #121212;
+    background-color: white;
+    width: 30vw;
+    height: 50vh;
+}
+
+canvas {
+    width: 70vw;
+    height: 100vh;
+}
