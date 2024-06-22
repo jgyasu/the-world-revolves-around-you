@@ -42,6 +42,27 @@ function modelLoaded() {
 
 // Listen to new 'hand' events
 handpose.on('hand', results => {
-    predictions = results;
-    console.log(predictions);
+    if (results.length > 0) {
+        // Assuming there's only one hand detected (for simplicity)
+        let landmarks = results[0].landmarks; // Get landmarks of the first detected hand
+        
+        // Log the x and y coordinates of a specific landmark (e.g., thumb tip)
+        let thumbTipX = landmarks[4][0]; // x coordinate of thumb tip
+        let thumbTipY = landmarks[4][1]; // y coordinate of thumb tip
+        
+        console.log(`Thumb tip coordinates - X: ${thumbTipX}, Y: ${thumbTipY}`);
+        
+        // You can access other landmarks similarly, e.g.,
+        // Index finger tip: landmarks[8]
+        // Middle finger tip: landmarks[12]
+        // Ring finger tip: landmarks[16]
+        // Little finger tip: landmarks[20]
+        
+        // Or loop through all landmarks to log all coordinates
+        /*
+        for (let i = 0; i < landmarks.length; i++) {
+            console.log(`Landmark ${i} - X: ${landmarks[i][0]}, Y: ${landmarks[i][1]}`);
+        }
+        */
+    }
 });
