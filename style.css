@@ -49,4 +49,6 @@ html, body {
     width: 100%; /* Ensure the video fills the videof container */
     height: 100%; /* Ensure the video fills the videof container */
     object-fit: cover; /* Maintain aspect ratio and cover entire container */
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
 }
