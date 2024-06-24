@@ -1,35 +1,52 @@
 html, body {
     margin: 0;
     padding: 0;
-    background-color: #121212;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .space {
     display: flex;
-    justify-content: right;
+    width: 100vw;
+    height: 100vh;
+}
+
+.left {
+    flex: 0 0 70%; /* Ensure the left div takes 70% of the width */
+    height: 100%;
+    display: flex;
+    align-items: center; /* Center the canvas vertically */
+    justify-content: center; /* Center the canvas horizontally */
 }
 
 .right {
+    flex: 0 0 30%; /* Ensure the right div takes 30% of the width */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    height: 100%;
 }
 
 .videof {
     border-bottom: 1px solid #121212;
     background-color: white;
-    width: 30vw;
-    height: 50vh;
+    width: 100%; /* Fill the width of the right div */
+    height: 50%;
+    position: relative; /* Ensure proper positioning of the video element */
+    overflow: hidden; /* Hide any overflow from the video element */
 }
 
 .info {
     border-top: 1px solid #121212;
     background-color: white;
-    width: 30vw;
-    height: 50vh;
+    width: 100%; /* Fill the width of the right div */
+    height: 50%;
 }
 
-canvas {
-    width: 70vw;
-    height: 100vh;
+#myVidPlayer {
+    width: 100%; /* Ensure the video fills the videof container */
+    height: 100%; /* Ensure the video fills the videof container */
+    object-fit: cover; /* Maintain aspect ratio and cover entire container */
 }
