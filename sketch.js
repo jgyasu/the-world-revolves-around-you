@@ -4,14 +4,30 @@ let hands = [];
 
 let particles = [];
 
+let bgMusic;
+let assetsLoaded = false;
+
 function preload() {
     // Load the handPose model
     handPose = ml5.handPose();
+    bgMusic = loadSound('bg_music.mp3', onLoad);
+}
+
+function onLoad() {
+    assetsLoaded = true;
 }
 
 var canvas; // Declare canvas variable
 
 function setup() {
+
+    if (!assetsLoaded) {
+        return; // Wait until all assets are loaded
+      }
+      
+      // Start music
+      bgMusic.loop();
+
     // Create a canvas with 70% of the window width and 100% of the window height
     canvas = createCanvas(windowWidth * 0.7, windowHeight);
     canvas.parent('canvasContainer'); // Attach the canvas to the left div
@@ -29,6 +45,8 @@ function setup() {
 }
 
 function draw() {
+    if (!assetsLoaded) return;
+
     background(0);
     push();
     scale(-1, 1);
@@ -49,6 +67,18 @@ function draw() {
         // drawHandIndicator(width - controlX, controlY);
     }
 }
+
+function mousePressed() {
+    // This function is required to handle the first user interaction to start the audio
+    if (getAudioContext().state !== 'running') {
+      getAudioContext().resume();
+    }
+    
+    if (!bgMusic.isPlaying() && assetsLoaded) {
+      bgMusic.loop();
+    }
+}
+  
 
 // Callback function for when handPose outputs data
 function gotHands(results) {
