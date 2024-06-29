@@ -214,8 +214,8 @@ class Star {
     }
 
     update() {
-        this.brightness = 255 * abs(sin(frameCount * 0.01 + this.offset)); // slower twinkling effect
-        this.size = this.baseSize + this.baseSize * 0.5 * sin(frameCount * 0.01 + this.offset); // size variation
+        this.brightness = 255 * abs(sin(frameCount * 0.03 + this.offset)); // slower twinkling effect
+        this.size = this.baseSize + this.baseSize * 0.05 * sin(frameCount * 0.01 + this.offset); // size variation
     }
 
     show() {
