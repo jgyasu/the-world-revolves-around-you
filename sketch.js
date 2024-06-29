@@ -3,6 +3,7 @@ let video;
 let hands = [];
 
 let particles = [];
+let stars = [];
 
 let bgMusic;
 let assetsLoaded = false;
@@ -20,13 +21,12 @@ function onLoad() {
 var canvas; // Declare canvas variable
 
 function setup() {
-
     if (!assetsLoaded) {
         return; // Wait until all assets are loaded
-      }
-      
-      // Start music
-      bgMusic.loop();
+    }
+
+    // Start music
+    bgMusic.loop();
 
     // Create a canvas with 70% of the window width and 100% of the window height
     canvas = createCanvas(windowWidth * 0.7, windowHeight);
@@ -42,12 +42,24 @@ function setup() {
     for (let i = 0; i < 100; i++) {
         particles.push(new Particle(random(width), random(height)));
     }
+
+    // Initialize stars
+    for (let i = 0; i < 200; i++) {
+        stars.push(new Star(random(width), random(height)));
+    }
 }
 
 function draw() {
     if (!assetsLoaded) return;
 
     background(0);
+
+    // Draw and update stars
+    for (let star of stars) {
+        star.update();
+        star.show();
+    }
+
     push();
     scale(-1, 1);
     pop();
@@ -71,14 +83,13 @@ function draw() {
 function mousePressed() {
     // This function is required to handle the first user interaction to start the audio
     if (getAudioContext().state !== 'running') {
-      getAudioContext().resume();
+        getAudioContext().resume();
     }
-    
+
     if (!bgMusic.isPlaying() && assetsLoaded) {
-      bgMusic.loop();
+        bgMusic.loop();
     }
 }
-  
 
 // Callback function for when handPose outputs data
 function gotHands(results) {
@@ -190,5 +201,29 @@ class Particle {
 
     applyForce(force) {
         this.acc.add(force);
+    }
+}
+
+// Star class
+class Star {
+    constructor(x, y) {
+        this.pos = createVector(x, y);
+        this.brightness = random(100, 255);
+        this.offset = random(TWO_PI); // randomize the phase for each star
+        this.baseSize = random(1, 3); // base size of the star
+    }
+
+    update() {
+        this.brightness = 255 * abs(sin(frameCount * 0.01 + this.offset)); // slower twinkling effect
+        this.size = this.baseSize + this.baseSize * 0.5 * sin(frameCount * 0.01 + this.offset); // size variation
+    }
+
+    show() {
+        push();
+        translate(this.pos.x, this.pos.y);
+        noStroke();
+        fill(this.brightness);
+        ellipse(0, 0, this.size, this.size);
+        pop();
     }
 }
