@@ -39,7 +39,7 @@ function setup() {
     handPose.detectStart(video, gotHands);
 
     // Initialize particles
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 50; i++) {
         particles.push(new Particle(random(width), random(height)));
     }
 
@@ -76,7 +76,7 @@ function draw() {
         let hand = hands[0];
         let controlX = hand.middle_finger_pip.x;
         let controlY = hand.middle_finger_pip.y;
-        // drawHandIndicator(width - controlX, controlY);
+        drawHandIndicator(width - controlX, controlY);
     }
 }
 
@@ -116,6 +116,56 @@ function drawHandIndicator(x, y) {
     pop();
 }
 
+function drawCrane(r) {
+    fill(255); // white color for the crane body
+    stroke(255); // black outline for the crane
+
+    // Body
+    beginShape();
+    vertex(0, -r * 2); // head
+    vertex(-r * 0.3, -r * 0.5); // left shoulder
+    vertex(-r * 0.5, r * 1.0); // left body
+    vertex(0, r * 2); // tail
+    vertex(r * 0.5, r * 1.0); // right body
+    vertex(r * 0.3, -r * 0.5); // right shoulder
+    endShape(CLOSE);
+
+    // Left Wing angled down
+    beginShape();
+    vertex(-r * 0.3, -r * 0.5); // left shoulder
+    vertex(-r * 2.0, r * 1.5); // left wing tip
+    vertex(-r * 0.5, r * 1.0); // left body
+    endShape(CLOSE);
+
+    // Right Wing angled down
+    beginShape();
+    vertex(r * 0.3, -r * 0.5); // right shoulder
+    vertex(r * 2.0, r * 1.5); // right wing tip
+    vertex(r * 0.5, r * 1.0); // right body
+    endShape(CLOSE);
+
+    // Legs
+    stroke(255, 204, 0); // yellow color
+    strokeWeight(1);
+    line(-r * 0.1, r * 2, -r * 0.1, r * 2.5); // left leg
+    line(r * 0.1, r * 2, r * 0.1, r * 2.5); // right leg
+    noStroke();
+
+    // Beak
+    fill(255, 0, 0); // red color
+    beginShape();
+    vertex(0, -r * 2); // head
+    vertex(-r * 0.1, -r * 2.5); // beak left
+    vertex(r * 0.1, -r * 2.5); // beak right
+    endShape(CLOSE);
+
+    // Eyes
+    fill(0); // black color for the eyes
+    ellipse(-r * 0.1, -r * 1.8, r * 0.1, r * 0.1); // left eye
+    ellipse(r * 0.1, -r * 1.8, r * 0.1, r * 0.1); // right eye
+}
+
+
 // Particle class
 class Particle {
     constructor(x, y) {
@@ -124,7 +174,7 @@ class Particle {
         this.acc = createVector();
         this.maxSpeed = 2;
         this.maxForce = 0.1;
-        this.r = 6; // radius for the triangle
+        this.r = 8; // radius for the triangle
     }
 
     update() {
@@ -140,11 +190,7 @@ class Particle {
         rotate(this.vel.heading() + PI / 2);
         fill(255);
         stroke(255);
-        beginShape();
-        vertex(0, -this.r * 2);
-        vertex(-this.r, this.r * 2);
-        vertex(this.r, this.r * 2);
-        endShape(CLOSE);
+        drawCrane(this.r);
         pop();
     }
 
