@@ -166,7 +166,6 @@ function drawCrane(r) {
 }
 
 
-// Particle class
 class Particle {
     constructor(x, y) {
         this.pos = createVector(x, y);
@@ -182,6 +181,23 @@ class Particle {
         this.vel.limit(this.maxSpeed);
         this.pos.add(this.vel);
         this.acc.set(0, 0);
+        
+        // Check for boundaries and reposition if necessary with randomness
+        if (this.pos.x < 0) {
+            this.pos.x = width;
+            this.pos.y = random(height);
+        } else if (this.pos.x > width) {
+            this.pos.x = 0;
+            this.pos.y = random(height);
+        }
+        
+        if (this.pos.y < 0) {
+            this.pos.y = height;
+            this.pos.x = random(width);
+        } else if (this.pos.y > height) {
+            this.pos.y = 0;
+            this.pos.x = random(width);
+        }
     }
 
     show() {
@@ -234,9 +250,6 @@ class Particle {
 
         if (count > 0) {
             steer.div(count);
-        }
-
-        if (steer.mag() > 0) {
             steer.setMag(this.maxSpeed);
             steer.sub(this.vel);
             steer.limit(this.maxForce);
@@ -249,6 +262,7 @@ class Particle {
         this.acc.add(force);
     }
 }
+
 
 // Star class
 class Star {
