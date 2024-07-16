@@ -29,7 +29,7 @@ function setup() {
     bgMusic.loop();
 
     // Create a canvas with 70% of the window width and 100% of the window height
-    canvas = createCanvas(windowWidth * 0.7, windowHeight);
+    canvas = createCanvas(windowWidth * 0.8, windowHeight);
     canvas.parent('canvasContainer'); // Attach the canvas to the left div
 
     video = createCapture(VIDEO);
@@ -39,7 +39,7 @@ function setup() {
     handPose.detectStart(video, gotHands);
 
     // Initialize particles
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 100; i++) {
         particles.push(new Particle(random(width), random(height)));
     }
 
@@ -99,7 +99,7 @@ function gotHands(results) {
 
 // Adjust the canvas size when the window is resized
 function windowResized() {
-    resizeCanvas(windowWidth * 0.7, windowHeight);
+    resizeCanvas(windowWidth * 0.8, windowHeight);
 }
 
 // Draw a red triangle at the specified position

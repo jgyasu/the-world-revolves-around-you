@@ -14,7 +14,7 @@ html, body {
 }
 
 .left {
-    flex: 0 0 70%; /* Ensure the left div takes 70% of the width */
+    flex: 0 0 80%; /* Ensure the left div takes 70% of the width */
     height: 100%;
     display: flex;
     align-items: center; /* Center the canvas vertically */
@@ -22,27 +22,62 @@ html, body {
 }
 
 .right {
-    flex: 0 0 30%; /* Ensure the right div takes 30% of the width */
+    flex: 0 0 20%; /* Ensure the right div takes 30% of the width */
+    position: fixed; /* Make the right div fixed */
+    right: 0; /* Align it to the right */
+    top: 0; /* Align it to the top */
+    width: 20%; /* Ensure the right div takes 30% of the width */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+    background-color: #f5f5dc; /* Cream background */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for aesthetics */
 }
 
-.videof {
-    border-bottom: 1px solid #121212;
-    background-color: white;
-    width: 100%; /* Fill the width of the right div */
-    height: 50%;
-    position: relative; /* Ensure proper positioning of the video element */
-    overflow: hidden; /* Hide any overflow from the video element */
+.content-box {
+    background-color: #fff; /* White background for content box */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for content box */
 }
 
-.info {
-    border-top: 1px solid #121212;
-    background-color: white;
-    width: 100%; /* Fill the width of the right div */
-    height: 50%;
+.credits {
+    margin-top: 20px;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    color: #777;
+}
+
+.credits h2 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.credits a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.credits a:hover {
+    text-decoration: underline;
+}
+
+.title {
+    margin: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    color: #333;
+}
+
+.content {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    color: #555;
 }
 
 #myVidPlayer {
