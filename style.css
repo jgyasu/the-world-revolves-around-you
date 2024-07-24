@@ -43,6 +43,15 @@ html, body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for content box */
 }
 
+.content-box a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.content-box a:hover {
+    text-decoration: underline;
+}
+
 .credits {
     margin-top: 20px;
     font-family: 'Arial', sans-serif;
